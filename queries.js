@@ -71,6 +71,31 @@ const getUsers = (request, response) => {
     })
   }
 
+  const getRecordExist = (request, response) => {
+    const username = request.params.username
+    const pwd = request.params.pwd
+    //console.log(username)
+    //console.log(pwd)
+    pool.query('select count(*) as cnt from ngdrstab_mst_user where username= $1 and password=$2', [username,pwd], (error, result) => {
+      if(error){
+        throw error
+      }
+      response.status(200).json(result.rows)
+    })
+
+  }
+
+  const getpwdfromdb = (request, response) => {
+    const username = request.params.username
+
+    pool.query('select password from ngdrstab_mst_user where username = $1', [username], (error, result) => {
+      if(error){
+        throw error
+      }
+      response.status(200).json(result.rows)
+    })
+
+  }
 
   module.exports = {
     getUsers,
@@ -78,5 +103,7 @@ const getUsers = (request, response) => {
     getallUsersCitizen,
     getallState,
     getDistricts,
-    getTalukas
+    getTalukas,
+    getRecordExist,
+    getpwdfromdb
 }

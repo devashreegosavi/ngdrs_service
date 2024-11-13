@@ -34,6 +34,8 @@ app.get('/', (request, response) => {
   app.get('/getallstatesdata', db.getallState)
   app.get('/getalldistrictsdata/:id', db.getDistricts)
   app.get('/getalltalukadata/:id', db.getTalukas)
+  app.get('/getRecordExist/:username/:pwd', db.getRecordExist)
+  app.get('/getpwdfromdb/:username',db.getpwdfromdb)
 
   //app.get('/getdistrictbystateid/:stateid', db.getDistrictBystateId)
 
